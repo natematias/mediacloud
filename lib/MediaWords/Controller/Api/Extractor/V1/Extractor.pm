@@ -85,7 +85,7 @@ sub extract_PUT : Local
 
     $ret->{ included_line_numbers } = $results->{ included_line_numbers };
 
-    $ret->{ text } = $lines[ $ret->{ included_line_numbers } ];
+    $ret->{ text } = $lines[ @{$ret->{ included_line_numbers }} ];
 
     say STDERR "returning:\n" . Dumper ( $ret );
 
