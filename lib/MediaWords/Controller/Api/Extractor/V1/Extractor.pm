@@ -85,7 +85,9 @@ sub extract_PUT : Local
 
     $ret->{ included_line_numbers } = $results->{ included_line_numbers };
 
-    $ret->{ text } = [ map { $results->{ download_lines }->[ $_ ] } @{$ret->{ included_line_numbers }} ];
+    $ret->{ extracted_text } = [ map { $results->{ download_lines }->[ $_ ] } @{$ret->{ included_line_numbers }} ];
+
+    $ret->{ extracted_text } = MediaWords::Util::HTML::html_strip( $ret->{ extracted_text } )
 
     say STDERR "returning:\n" . Dumper ( $ret );
 
