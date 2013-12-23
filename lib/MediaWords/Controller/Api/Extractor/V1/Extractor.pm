@@ -66,14 +66,14 @@ sub extract_PUT : Local
     my ( $self, $c ) = @_;
     my $extract = $c->req->data;
 
-    my @lines = split( /[\n\r]+/, $$html );
+    my @lines = split( /[\n\r]+/, $extract );
 
     my $lines = MediaWords::Crawler::Extractor::preprocess( \@lines );
 
     my $title = '';
     my $description = '';
 
-    my $ret = MediaWords::DBI::Downloads::extract_preprocessed_lines_for_story( $lines, $story->{ title }, $story->{ description } );
+    my $ret = MediaWords::DBI::Downloads::extract_preprocessed_lines_for_story( $lines, $title, $description );
     $self->status_ok( $c, entity => $ret );
 
 }
