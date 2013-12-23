@@ -79,7 +79,14 @@ sub extract_PUT : Local
 
     my $lines = MediaWords::Crawler::Extractor::preprocess( \@lines );
 
-    my $ret = MediaWords::DBI::Downloads::extract_preprocessed_lines_for_story( $lines, $title, $description );
+    my $results = MediaWords::DBI::Downloads::extract_preprocessed_lines_for_story( $lines, $title, $description );
+
+    my $ret = {};
+
+    $ret->{ included_line_numbers } = $results->{ included_line_numbers };
+
+    $ret->{ text } = $lines[ $ret->{ included_line_numbers } ];
+
     $self->status_ok( $c, entity => $ret );
 
 }
