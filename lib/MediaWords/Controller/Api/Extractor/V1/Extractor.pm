@@ -73,7 +73,7 @@ sub extract_PUT : Local
     my $description = $c->req->{ parameters }->{ doc };
 
     say STDERR "title:$title";
-    say STDERR "doc:\n$doc";
+    #say STDERR "doc:\n$doc";
 
     my @lines = split( /[\n\r]+/, $doc );
 
@@ -86,6 +86,8 @@ sub extract_PUT : Local
     $ret->{ included_line_numbers } = $results->{ included_line_numbers };
 
     $ret->{ text } = $lines[ $ret->{ included_line_numbers } ];
+
+    say STDERR "returning:\n" . Dumper ( $ret );
 
     $self->status_ok( $c, entity => $ret );
 
