@@ -66,6 +66,7 @@ sub extract_PUT : Local
     my ( $self, $c ) = @_;
     my $extract = $c->req->data;
 
+    say STDERR Dumper( $c->req );
 
     say STDERR Dumper( $extract );
 
