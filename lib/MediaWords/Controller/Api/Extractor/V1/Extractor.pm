@@ -64,13 +64,17 @@ sub extract : Local : ActionClass('REST')
 sub extract_PUT : Local
 {
     my ( $self, $c ) = @_;
-    say STDERR Dumper( $c->req->{ parameters} );
+
+    #say STDERR Dumper( $c->req->{ parameters} );
 
     
     my $doc = $c->req->{ parameters }->{ doc };
     my $title = $c->req->{ parameters }->{ doc };
     my $description = $c->req->{ parameters }->{ doc };
-    
+
+    say STDERR "title:$title";
+    say STDERR "doc:\n$doc";
+
     my @lines = split( /[\n\r]+/, $doc );
 
     my $lines = MediaWords::Crawler::Extractor::preprocess( \@lines );
