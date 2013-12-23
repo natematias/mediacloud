@@ -78,8 +78,6 @@ sub extract_PUT : Local
 
 }
 
-}
-
 sub extract_GET : Local
 {
     my ( $self, $c, $id ) = @_;
