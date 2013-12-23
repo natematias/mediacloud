@@ -15,6 +15,7 @@ use List::Compare;
 use Carp;
 use MediaWords::Crawler::Extractor;
 use MediaWords::DBI::Downloads;
+use MediaWords::Util::HTML;
 
 =head1 NAME
 
@@ -85,9 +86,11 @@ sub extract_PUT : Local
 
     $ret->{ included_line_numbers } = $results->{ included_line_numbers };
 
-    $ret->{ extracted_text } = [ map { $results->{ download_lines }->[ $_ ] } @{$ret->{ included_line_numbers }} ];
+    my $extracted_text = [ map { $results->{ download_lines }->[ $_ ] } @{$ret->{ included_line_numbers }} ];
 
-    $ret->{ extracted_text } = MediaWords::Util::HTML::html_strip( $ret->{ extracted_text } )
+    $extracted_text = [ map { MediaWords::Util::HTML::html_strip( $_ ) } @$extracted_text ];
+
+    $ret->{ extracted_text } = $extracted_text;
 
     say STDERR "returning:\n" . Dumper ( $ret );
 
