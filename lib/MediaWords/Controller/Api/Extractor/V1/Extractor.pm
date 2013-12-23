@@ -66,6 +66,9 @@ sub extract_PUT : Local
     my ( $self, $c ) = @_;
     my $extract = $c->req->data;
 
+
+    say STDERR Dumper( $extract );
+
     my @lines = split( /[\n\r]+/, $extract );
 
     my $lines = MediaWords::Crawler::Extractor::preprocess( \@lines );
@@ -82,8 +85,6 @@ sub extract_GET : Local
 {
     my ( $self, $c, $id ) = @_;
     my $extract = $c->req->data;
-
-    my $story_extract = $c->dbis->find_by_id( 'story_extracts', $id );
 
 }
 
